@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Instrument Serif", serif;
+    --font-body: "Plus Jakarta Sans", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --radius: 0.25rem;
+
+    /* Luxury palette: warm ivory background */
+    --background: 0.965 0.008 80;
+    --foreground: 0.14 0.035 258;
+    --card: 0.99 0.003 80;
+    --card-foreground: 0.14 0.035 258;
+    --popover: 0.99 0.003 80;
+    --popover-foreground: 0.14 0.035 258;
+
+    /* Deep navy primary */
+    --primary: 0.19 0.042 258;
+    --primary-foreground: 0.97 0.005 80;
+
+    /* Soft ivory secondary */
+    --secondary: 0.94 0.012 82;
+    --secondary-foreground: 0.19 0.042 258;
+    --muted: 0.91 0.008 75;
+    --muted-foreground: 0.5 0.02 250;
+
+    /* Deep gold accent */
+    --accent: 0.62 0.1 78;
+    --accent-foreground: 0.14 0.035 258;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.88 0.01 78;
+    --input: 0.88 0.01 78;
+    --ring: 0.62 0.1 78;
+
+    --chart-1: 0.65 0.22 40;
+    --chart-2: 0.6 0.12 185;
+    --chart-3: 0.4 0.07 227;
+    --chart-4: 0.83 0.19 84;
+    --chart-5: 0.77 0.19 70;
+
+    --sidebar: 0.99 0.003 80;
+    --sidebar-foreground: 0.14 0.035 258;
+    --sidebar-primary: 0.19 0.042 258;
+    --sidebar-primary-foreground: 0.97 0.005 80;
+    --sidebar-accent: 0.94 0.012 82;
+    --sidebar-accent-foreground: 0.19 0.042 258;
+    --sidebar-border: 0.88 0.01 78;
+    --sidebar-ring: 0.62 0.1 78;
+  }
+
+  .dark {
+    --background: 0.14 0.035 258;
+    --foreground: 0.965 0.008 80;
+    --card: 0.18 0.038 258;
+    --card-foreground: 0.965 0.008 80;
+    --popover: 0.18 0.038 258;
+    --popover-foreground: 0.965 0.008 80;
+
+    --primary: 0.965 0.008 80;
+    --primary-foreground: 0.14 0.035 258;
+
+    --secondary: 0.22 0.04 258;
+    --secondary-foreground: 0.92 0.01 80;
+    --muted: 0.25 0.04 258;
+    --muted-foreground: 0.65 0.01 80;
+
+    --accent: 0.68 0.12 78;
+    --accent-foreground: 0.14 0.035 258;
+
+    --destructive: 0.65 0.19 22;
+    --destructive-foreground: 0.14 0.035 258;
+
+    --border: 0.24 0.04 258;
+    --input: 0.24 0.04 258;
+    --ring: 0.68 0.12 78;
+
+    --chart-1: 0.49 0.24 264;
+    --chart-2: 0.7 0.17 162;
+    --chart-3: 0.77 0.19 70;
+    --chart-4: 0.63 0.27 304;
+    --chart-5: 0.65 0.25 16;
+
+    --sidebar: 0.18 0.038 258;
+    --sidebar-foreground: 0.965 0.008 80;
+    --sidebar-primary: 0.965 0.008 80;
+    --sidebar-primary-foreground: 0.14 0.035 258;
+    --sidebar-accent: 0.22 0.04 258;
+    --sidebar-accent-foreground: 0.92 0.01 80;
+    --sidebar-border: 0.24 0.04 258;
+    --sidebar-ring: 0.68 0.12 78;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .shadow-luxury {
+    box-shadow: 0 4px 20px rgba(26, 31, 46, 0.1);
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 12px 40px rgba(26, 31, 46, 0.18);
+  }
+
+  .shadow-subtle {
+    box-shadow: 0 2px 8px rgba(26, 31, 46, 0.06);
+  }
+
+  .transition-luxury {
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tracking-luxury {
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .text-luxury {
+    letter-spacing: 0.025em;
+    line-height: 1.7;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease forwards;
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .image-luxury {
+    filter: brightness(0.95) contrast(1.05) saturate(0.9);
+  }
+}

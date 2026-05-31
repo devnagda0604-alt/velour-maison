@@ -1,0 +1,25 @@
+{
+  "overview": "A luxury pants brand website that exudes exclusivity and craftsmanship. Features curated collections (Atelier, Heritage, Comfort), full e-commerce functionality, and a premium visual identity with deep navy, ivory, and gold tones — positioning the brand as the world's finest comfort luxury pants.",
+  "features": [
+    "Luxury homepage with brand storytelling and hero section",
+    "Three curated collections: Atelier, Heritage, and Comfort",
+    "Product detail pages with craftsmanship callouts and size selection",
+    "Shopping cart and multi-step checkout with Stripe payments",
+    "Login and sign-up with Internet Identity authentication",
+    "Account dashboard with order history and wishlist",
+    "About Us page with artisan spotlights and material sourcing story",
+    "Premium design: deep navy, ivory, and gold color palette with serif typography"
+  ],
+  "category": "e-commerce",
+  "tags": [
+    "luxury",
+    "fashion",
+    "e-commerce",
+    "pants",
+    "artisan",
+    "premium",
+    "clothing",
+    "boutique"
+  ],
+  "last_updated": "2026-05-15T04:20:00.170Z"
+}

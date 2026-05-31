@@ -1,0 +1,185 @@
+type WishlistItem = 
+ record {
+   addedAt: Timestamp;
+   productId: ProductId;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserProfilePublic = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   id: UserId;
+   name: text;
+   preferences: UserPreferences;
+   updatedAt: Timestamp;
+ };
+type UserPreferences = 
+ record {
+   fitQuizResult: opt FitQuizResult;
+   newsletter: bool;
+   sizePreference: opt text;
+   vipEnrolledAt: opt Timestamp;
+   vipStatus: bool;
+ };
+type UserId = principal;
+type Timestamp = int;
+type SizeStock = 
+ record {
+   size: Size;
+   stock: nat;
+ };
+type Size = 
+ variant {
+   L;
+   M;
+   S;
+   XL;
+   XS;
+   XXL;
+ };
+type ShippingAddress = 
+ record {
+   addressLine1: text;
+   addressLine2: text;
+   city: text;
+   country: text;
+   fullName: text;
+   postalCode: text;
+   state: text;
+ };
+type ProductPublic = 
+ record {
+   collection: Collection;
+   createdAt: Timestamp;
+   description: text;
+   id: ProductId;
+   images: vec text;
+   material: text;
+   name: text;
+   price: nat;
+   rarityMessage: text;
+   sizeStocks: vec SizeStock;
+   totalStock: nat;
+ };
+type ProductId = nat;
+type OrderStatus = 
+ variant {
+   Cancelled;
+   Confirmed;
+   Delivered;
+   Pending;
+   Shipped;
+ };
+type OrderPublic = 
+ record {
+   billingInfo: BillingInfo;
+   createdAt: Timestamp;
+   id: OrderId;
+   items: vec OrderItem;
+   owner: UserId;
+   shippingAddress: ShippingAddress;
+   status: OrderStatus;
+   totalAmount: nat;
+   updatedAt: Timestamp;
+ };
+type OrderItem = 
+ record {
+   productId: ProductId;
+   productName: text;
+   quantity: nat;
+   size: Size;
+   unitPrice: nat;
+ };
+type OrderId = nat;
+type FitQuizResultInput = 
+ record {
+   bodyType: text;
+   confidenceScore: nat;
+   fitPreference: text;
+   recommendedSize: text;
+ };
+type FitQuizResult = 
+ record {
+   bodyType: text;
+   completedAt: Timestamp;
+   confidenceScore: nat;
+   fitPreference: text;
+   recommendedSize: text;
+ };
+type Collection = 
+ variant {
+   Atelier;
+   Comfort;
+   Heritage;
+ };
+type CartPublic = 
+ record {
+   items: vec CartItem;
+   owner: UserId;
+   updatedAt: Timestamp;
+ };
+type CartItem = 
+ record {
+   productId: ProductId;
+   quantity: nat;
+   size: Size;
+ };
+type BillingInfo = 
+ record {
+   addressLine1: text;
+   city: text;
+   country: text;
+   email: text;
+   fullName: text;
+   postalCode: text;
+ };
+service : {
+  _initializeAccessControl: () -> ();
+  addToCart: (productId: ProductId, size: Size, quantity: nat) ->
+   (CartPublic);
+  addToWishlist: (productId: ProductId) -> ();
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  clearCart: () -> ();
+  createOrder: (shippingAddress: ShippingAddress, billingInfo:
+   BillingInfo) -> (OrderPublic);
+  enrollVIP: () -> ();
+  getCallerUserProfile: () -> (opt UserProfilePublic) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getCart: () -> (CartPublic) query;
+  getFitQuizResult: () -> (opt FitQuizResult) query;
+  getOrder: (orderId: OrderId) -> (opt OrderPublic) query;
+  getProduct: (id: ProductId) -> (opt ProductPublic) query;
+  getUserProfile: (user: UserId) -> (opt UserProfilePublic) query;
+  getVIPStatus: () -> (bool) query;
+  getWishlist: () -> (vec WishlistItem) query;
+  isCallerAdmin: () -> (bool) query;
+  listOrders: () -> (vec OrderPublic) query;
+  listProducts: () -> (vec ProductPublic) query;
+  listProductsByCollection: (collection: Collection) ->
+   (vec ProductPublic) query;
+  removeFromCart: (productId: ProductId, size: Size) -> (CartPublic);
+  removeFromWishlist: (productId: ProductId) -> ();
+  saveCallerUserProfile: (name: text, email: text, preferences:
+   UserPreferences) -> (UserProfilePublic);
+  saveFitQuizResult: (result: FitQuizResultInput) -> ();
+  seedProducts: (entries:
+   vec
+    record {
+      collection: Collection;
+      description: text;
+      images: vec text;
+      material: text;
+      name: text;
+      price: nat;
+      rarityMessage: text;
+      sizeStocks: vec SizeStock;
+    }) -> (nat);
+  updateCartQuantity: (productId: ProductId, size: Size, quantity: nat) ->
+   (CartPublic);
+  updateProductStock: (id: ProductId, sizeStocks: vec SizeStock) -> (bool);
+}
